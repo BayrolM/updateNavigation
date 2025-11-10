@@ -120,10 +120,6 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
     };
   }
 
-  /// ============================================================================
-  /// SCAFFOLD PRINCIPAL
-  /// Pantalla inicial que muestra los 6 botones para navegar a otros estados
-  /// ============================================================================
   Widget _buildPantallaPrincipal() {
     return Scaffold(
       appBar: AppBar(
@@ -246,15 +242,68 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
     );
   }
 
-  /// ============================================================================
-  /// SCAFFOLD ESTADO 1
-  /// Primera pantalla secundaria con título, contenedor y botón de regreso
-  /// ============================================================================
-  Widget _buildPantalla1() {
+  Widget _buildPantalla1() => _pantallaBase(
+    titulo: 'Pantalla 1',
+    color: Colors.blue,
+    descripcion:
+        'Esta es la primera pantalla de la aplicación. '
+        'Aquí puedes mostrar información específica del estado 1. '
+        'Los contenedores permiten agrupar widgets y aplicar estilos '
+        'como bordes, sombras y colores de fondo.',
+  );
+
+  Widget _buildPantalla2() => _pantallaBase(
+    titulo: 'Pantalla 2',
+    color: Colors.green,
+    descripcion:
+        'Esta es la segunda pantalla de la aplicación. '
+        'Cada pantalla mantiene su propio diseño y colores. '
+        'El manejo de estados permite que la aplicación sea '
+        'interactiva y responda a las acciones del usuario de '
+        'manera eficiente y organizada.',
+  );
+
+  Widget _buildPantalla3() => _pantallaBase(
+    titulo: 'Pantalla 3',
+    color: Colors.orange,
+    descripcion:
+        'Esta es la tercera pantalla de la aplicación. '
+        'El uso de setState() permite que Flutter redibuje solo '
+        'las partes necesarias de la interfaz, haciendo que las '
+        'aplicaciones sean rápidas y eficientes. Esta es una de '
+        'las características principales de Flutter.',
+  );
+
+  Widget _buildPantalla4() => _pantallaAnimada(
+    titulo: 'Pantalla 4',
+    color: const Color.fromARGB(255, 255, 0, 251),
+    colorTexto: const Color.fromARGB(255, 247, 0, 255),
+    imageUrl: 'https://picsum.photos/400/200?random=4',
+  );
+
+  Widget _buildPantalla5() => _pantallaAnimada(
+    titulo: 'Pantalla 5',
+    color: const Color.fromARGB(255, 179, 255, 0),
+    colorTexto: const Color.fromARGB(255, 179, 255, 0),
+    imageUrl: 'https://picsum.photos/400/200?random=5',
+  );
+
+  Widget _buildPantalla6() => _pantallaAnimada(
+    titulo: 'Pantalla 6',
+    color: const Color.fromARGB(255, 0, 76, 99),
+    colorTexto: const Color.fromARGB(255, 0, 76, 99),
+    imageUrl: 'https://picsum.photos/400/200?random=6',
+  );
+
+  Widget _pantallaBase({
+    required String titulo,
+    required Color color,
+    required String descripcion,
+  }) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pantalla 1'),
-        backgroundColor: Colors.blue,
+        title: Text(titulo),
+        backgroundColor: color,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -264,12 +313,12 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                '¡Bienvenido a la Pantalla 1!',
+              Text(
+                '¡Bienvenido a $titulo!',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: color,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -277,11 +326,11 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: Colors.grey.withAlpha(77),
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withValues(alpha: 0.3),
+                      color: Colors.grey.withAlpha((0.3 * 255).round()),
                       spreadRadius: 2,
                       blurRadius: 8,
                       offset: const Offset(0, 3),
@@ -290,12 +339,9 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
                 ),
                 child: Column(
                   children: [
-                    const Text(
-                      'Esta es la primera pantalla de la aplicación. '
-                      'Aquí puedes mostrar información específica del estado 1. '
-                      'Los contenedores permiten agrupar widgets y aplicar estilos '
-                      'como bordes, sombras y colores de fondo.',
-                      style: TextStyle(fontSize: 16, height: 1.5),
+                    Text(
+                      descripcion,
+                      style: const TextStyle(fontSize: 16, height: 1.5),
                       textAlign: TextAlign.justify,
                     ),
                     const SizedBox(height: 20),
@@ -307,7 +353,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
                         style: TextStyle(fontSize: 16),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: color,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,
@@ -328,197 +374,39 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
     );
   }
 
-  /// ============================================================================
-  /// SCAFFOLD ESTADO 2
-  /// Segunda pantalla secundaria con título, contenedor y botón de regreso
-  /// ============================================================================
-  Widget _buildPantalla2() {
+  Widget _pantallaAnimada({
+    required String titulo,
+    required Color color,
+    required Color colorTexto,
+    required String imageUrl,
+  }) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pantalla 2'),
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                '¡Bienvenido a la Pantalla 2!',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade50,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withValues(alpha: 0.3),
-                      spreadRadius: 2,
-                      blurRadius: 8,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Esta es la segunda pantalla de la aplicación. '
-                      'Cada pantalla mantiene su propio diseño y colores. '
-                      'El manejo de estados permite que la aplicación sea '
-                      'interactiva y responda a las acciones del usuario de '
-                      'manera eficiente y organizada.',
-                      style: TextStyle(fontSize: 16, height: 1.5),
-                      textAlign: TextAlign.justify,
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton.icon(
-                      onPressed: _volverAlInicio,
-                      icon: const Icon(Icons.arrow_back),
-                      label: const Text(
-                        'Volver al Inicio',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// ============================================================================
-  /// SCAFFOLD ESTADO 3
-  /// Tercera pantalla secundaria con título, contenedor y botón de regreso
-  /// ============================================================================
-  Widget _buildPantalla3() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pantalla 3'),
-        backgroundColor: Colors.orange,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                '¡Bienvenido a la Pantalla 3!',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade50,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withValues(alpha: 0.3),
-                      spreadRadius: 2,
-                      blurRadius: 8,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Esta es la tercera pantalla de la aplicación. '
-                      'El uso de setState() permite que Flutter redibuje solo '
-                      'las partes necesarias de la interfaz, haciendo que las '
-                      'aplicaciones sean rápidas y eficientes. Esta es una de '
-                      'las características principales de Flutter.',
-                      style: TextStyle(fontSize: 16, height: 1.5),
-                      textAlign: TextAlign.justify,
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton.icon(
-                      onPressed: _volverAlInicio,
-                      icon: const Icon(Icons.arrow_back),
-                      label: const Text(
-                        'Volver al Inicio',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPantalla4() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pantalla 4'),
-        backgroundColor: const Color.fromARGB(255, 255, 0, 251),
+        title: Text(titulo),
+        backgroundColor: color,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
       body: CustomScrollView(
-        slivers: <Widget>[
-          SliverFadeTransition(
-            opacity: _fadeAnimation,
-            sliver: SliverToBoxAdapter(
+        slivers: [
+          SliverToBoxAdapter(
+            child: FadeTransition(
+              opacity: _fadeAnimation,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        '¡Bienvenido a la Pantalla 4!',
+                      // Imagen de red añadida
+                      Image.network(imageUrl, height: 200, fit: BoxFit.cover),
+                      const SizedBox(height: 20),
+                      Text(
+                        '¡Bienvenido a $titulo!',
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 247, 0, 255),
+                          color: colorTexto,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -526,11 +414,11 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.purple.shade50,
+                          color: Colors.grey.withAlpha(77),
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withValues(alpha: 0.3),
+                              color: Colors.grey.withAlpha((0.3 * 255).round()),
                               spreadRadius: 2,
                               blurRadius: 8,
                               offset: const Offset(0, 3),
@@ -540,9 +428,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
                         child: Column(
                           children: [
                             const Text(
-                              'Esta pantalla tiene animación de fade. '
-                              'El contenido aparece y desaparece suavemente. '
-                              'SliverFadeTransition es ideal para listas deslizables.',
+                              'Pantalla con animación fade.',
                               style: TextStyle(fontSize: 16, height: 1.5),
                               textAlign: TextAlign.justify,
                             ),
@@ -555,192 +441,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
                                 style: TextStyle(fontSize: 16),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  255,
-                                  0,
-                                  217,
-                                ),
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 12,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPantalla5() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pantalla 5'),
-        backgroundColor: const Color.fromARGB(255, 179, 255, 0),
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverFadeTransition(
-            opacity: _fadeAnimation,
-            sliver: SliverToBoxAdapter(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        '¡Bienvenido a la Pantalla 5!',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 179, 255, 0),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 30),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.yellow.shade50,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withValues(alpha: 0.3),
-                              spreadRadius: 2,
-                              blurRadius: 8,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              'Animación aplicada aquí también. '
-                              'El fade cíclico hace la pantalla más viva.',
-                              style: TextStyle(fontSize: 16, height: 1.5),
-                              textAlign: TextAlign.justify,
-                            ),
-                            const SizedBox(height: 20),
-                            ElevatedButton.icon(
-                              onPressed: _volverAlInicio,
-                              icon: const Icon(Icons.arrow_back),
-                              label: const Text(
-                                'Volver al Inicio',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  179,
-                                  255,
-                                  0,
-                                ),
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 12,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPantalla6() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pantalla 6'),
-        backgroundColor: const Color.fromARGB(255, 0, 76, 99),
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverFadeTransition(
-            opacity: _fadeAnimation,
-            sliver: SliverToBoxAdapter(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        '¡Bienvenido a la Pantalla 6!',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 0, 76, 99),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 30),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.teal.shade50,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withValues(alpha: 0.3),
-                              spreadRadius: 2,
-                              blurRadius: 8,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              'Última pantalla con fade. '
-                              'Experimenta con curvas para personalizar.',
-                              style: TextStyle(fontSize: 16, height: 1.5),
-                              textAlign: TextAlign.justify,
-                            ),
-                            const SizedBox(height: 20),
-                            ElevatedButton.icon(
-                              onPressed: _volverAlInicio,
-                              icon: const Icon(Icons.arrow_back),
-                              label: const Text(
-                                'Volver al Inicio',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  0,
-                                  76,
-                                  99,
-                                ),
+                                backgroundColor: color,
                                 foregroundColor: Colors.white,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 24,
@@ -765,5 +466,3 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
     );
   }
 }
-
-// Aquí termina la primera mitad. La segunda mitad viene a continuación.

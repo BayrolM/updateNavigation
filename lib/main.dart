@@ -62,7 +62,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
   AppState _estadoActual = AppState.principal;
 
   late final AnimationController _animationController = AnimationController(
-    duration: const Duration(milliseconds: 1000),
+    duration: const Duration(milliseconds: 2000),
     vsync: this,
   );
 
@@ -74,14 +74,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
   @override
   void initState() {
     super.initState();
-    _fadeAnimation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _animationController.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _animationController.forward();
-      }
-    });
-    _animationController.forward();
+    _animationController.forward(from: 0);
   }
 
   @override
@@ -380,6 +373,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal>
     required Color colorTexto,
     required String imageUrl,
   }) {
+    _animationController.forward(from: 0);
     return Scaffold(
       appBar: AppBar(
         title: Text(titulo),
